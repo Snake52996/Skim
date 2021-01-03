@@ -1,5 +1,5 @@
 printHelp() {
-    echo "Usage: $0 <video_path>"
+    echo "Usage: $0 <video_path> [<row_number> <column_number>]"
     exit 1
 }
 getDuration() {
@@ -67,11 +67,15 @@ cleanUp() {
 }
 # >>>> Enterence <<<<
 # Verify parameters
-if [ $# -ne 1 ]; then
+if [ $# -ne 1 -a $# -ne 3 ]; then
     printHelp
 fi
 ROWS=4
 COLS=6
+if [ $# -eq 3 ]; then
+    ROWS=$2
+    COLS=$3
+fi
 PREVIEWS=`expr $ROWS \* $COLS`
 getDuration "$1"
 FRAMES=$?
